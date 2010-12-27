@@ -18,10 +18,15 @@ class Note(models.Model):
         >>> n.text = "here we type a lot of characters to test whether it trunkates correct - after the 24th char :-)"
         >>> n.title()
         'here we type a lot of ch...'
+        >>> n.text = '''
+        ...    line starts here   
+        ...    '''
+        >>> n.title()
+        'line starts here'
         """
         MAX_LEN = 24
         
-        text = self.text.split('\n')[0]
+        text = self.text.strip().split('\n')[0]
         if len(text) > MAX_LEN:
             title = text[:MAX_LEN] + '...'
         else:
