@@ -7,7 +7,7 @@ from django import forms
 class Note(models.Model):
     blank_msg = 'but not an empty note!'
     
-    text = models.TextField(blank=True) # prevents the default error message and handle validation in other place
+    text = models.TextField()
     order = models.IntegerField(default=0)
     user = models.ForeignKey(User)
     
@@ -39,6 +39,8 @@ class Note(models.Model):
         return title
     
 class NoteForm(forms.ModelForm):
+    
+    text = forms.CharField(widget=forms.Textarea, error_messages={'required': Note.blank_msg})
     
     def clean_text(self):
         if not self.cleaned_data['text'].strip():
