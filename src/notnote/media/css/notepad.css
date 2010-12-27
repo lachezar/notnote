@@ -56,3 +56,7 @@ a.delete:hover {
 li {
   line-height: 1.5em;
 }
+
+.note-errors {
+  color: #D75121;
+}

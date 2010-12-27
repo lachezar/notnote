@@ -51,5 +51,5 @@ def update(request, id):
             form.save()
             return HttpResponseRedirect(reverse(index))        
         
-    return direct_to_template(request, 'note/details.html', {'form': form})
+    return direct_to_template(request, 'note/details.html', {'form': form, 'note_id': note.id})
 

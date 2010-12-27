@@ -14,11 +14,16 @@
       <div class="notepad-header">
         <h1>
           Take a note...
+          {% if form.text.errors %}
+            <span class="note-errors">
+            {{ form.text.errors|striptags }}
+            </span>
+          {% endif %}
         </h1>
         <div class="buttons">
           <input type="submit" value="Save" />
-          {% if form.data.id %}
-          <input type="button" value="Delete" onclick="javascript: delete_note({{ form.data.id }})" />
+          {% if note_id %}
+          <input type="button" value="Delete" onclick="javascript: delete_note({{ note_id }})" />
           {% endif %}         
           <input type="button" value="Back" onclick="javascript: location.href = {% url note.views.index %}" />
         </div>
