@@ -1,0 +1,12 @@
+<form id="delete_form" action="{% url note.views.delete %}" method="post">
+  {% csrf_token %}
+  <div>
+    <input type="hidden" id="note_id" name="note_id" value="" />
+  </div>
+</form>
+<script type="text/javascript">
+  function delete_note(id) {
+    document.getElementById("note_id").value = id;
+    document.getElementById("delete_form").submit();
+  }
+</script>

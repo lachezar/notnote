@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/notepad.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/openid.css" />
+
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.2.6.min.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/openid-jquery.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      openid.init('openid_identifier');
+    });
+  </script>
+{% endblock %}
+
+{% block content %}
+
+<div style="float: left">
+
+    {% if user.is_authenticated %}
+      <p>You are already logged in. <a href="{% url socialauth_social_logout %}">Logout</a>?</p>
+    {% else %}
+    
+      {% if FACEBOOK_APP_ID %}
+        <div id="fb-root"></div>
+        <script type="text/javascript">
+            window.fbAsyncInit = function() {
+              FB.init({appId: '{{ FACEBOOK_APP_ID }}', status: true, cookie: true, xfbml: true});
+              FB.Event.subscribe('auth.sessionChange', function(response) {
+                if (response.session) {
+                    window.location = '{% url socialauth_facebook_login_done %}';
+                } else {
+                    //window.location = '{% url socialauth_social_logout %}';
+                }
+              });
+            };
+            (function() {
+              var e = document.createElement('script');
+              e.type = 'text/javascript';
+              e.src = document.location.protocol +
+                '//connect.facebook.net/en_US/all.js';
+              e.async = true;
+              document.getElementById('fb-root').appendChild(e);
+            }());
+        </script>
+      {% endif %}
+    
+      <h2>
+        Login via...
+      </h2>
+      <ul>
+        <li>
+            <a href="{% url socialauth_facebook_login %}">facebook</a>
+        </li>
+        <li>
+            <a href="{% url socialauth_twitter_login %}">twitter</a>
+        </li>
+        <li>
+            <a href="{% url socialauth_google_login %}">google</a>
+        </li>
+        <li>
+            <a href="{% url socialauth_linkedin_login %}">linkedin</a>
+        </li>
+      </ul>  
+    {% endif %}
+</div>
+
+<div>
+  <img src="http://screenshoot.me/D7hB5r" alt=" "  />
+</div>
+
+{% endblock %}

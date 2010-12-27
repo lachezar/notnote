@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/notepad.css" type="text/css" media="screen" />
+  <script src="{{ MEDIA_URL }}js/helpers.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<div style="float: left">
+  <h2>My Notes</h2>
+
+  {% if object_list %}
+    <ul class="notes-list">
+        {% for note in object_list %}
+            <li>
+              <a href="{% url note.views.update id=note.id %}">{{ note.title }}</a>
+              (<a href="javascript: void(0)" onclick="javascript: delete_note({{ note.id }})" class="delete">delete</a>)                        
+            </li>
+        {% endfor %}
+    </ul>
+{% include "note/__delete.html" %}
+    {% else %}
+      <strong>
+      No notes :-(
+    </strong>
+  {% endif %}
+  <p>
+    <a href="{% url note.views.new %}">Add note</a>
+  </p>
+  <p>
+    <a href="{% url socialauth.views.social_logout %}">Exit</a>
+  </p>
+</div>
+
+<div>
+  <img src="http://screenshoot.me/D7hB5r" alt=" "  />
+</div>
+{% endblock %}

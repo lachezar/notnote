@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/notepad.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Vibur" type="text/css" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile" type="text/css" />
+<script src="{{ MEDIA_URL }}js/helpers.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <div>
+      <div class="notepad-header">
+        <h1>
+          Take a note...
+        </h1>
+        <div class="buttons">
+          <input type="submit" value="Save" />
+          {% if form.data.id %}
+          <input type="button" value="Delete" onclick="javascript: delete_note({{ form.data.id }})" />
+          {% endif %}         
+          <input type="button" value="Back" onclick="javascript: location.href = {% url note.views.index %}" />
+        </div>
+      </div>
+      <textarea class="notepad-body" name="text" rows="0" cols="0">{{ form.data.text }}</textarea>
+    </div>
+  </form>
+  {% include "note/__delete.html" %}
+  <p>
+    <a href="{% url socialauth.views.social_logout %}">Exit</a>
+  </p>
+{% endblock %}

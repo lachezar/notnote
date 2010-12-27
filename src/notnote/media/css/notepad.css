@@ -1,0 +1,58 @@
+body {
+  font-family: 'Verdana', arial, serif; 
+}
+
+.notepad-header {
+  position: relative;
+  background-image: url(/media/images/notepad_header.png);
+  margin: 0; 
+  padding: 0;
+  width: 760px; 
+  height: 88px;
+}
+
+.notepad-header h1 {
+  font-family: 'Vibur', arial, serif;
+  color: #fff; 
+  padding-top: 20px;
+  padding-left: 20px; 
+}
+
+.notepad-body {
+  background-image: url(/media/images/notepad_body.png); 
+  margin: 0; 
+  padding: 0 8px; 
+  border: none; 
+  width: 744px; 
+  height: 566px;
+}
+
+.buttons {
+  text-align: right; 
+  position: absolute; 
+  bottom: 10px; 
+  right: 10px
+}
+
+.buttons input {
+  font-size: 1.2em;
+}
+
+textarea {
+  font-family: 'Nobile', arial, serif;
+  font-size: 19px;
+}
+
+a.delete, a.delete:link, a.delete:visited {
+  color: #E4287C;
+  font-size: 90%;
+}
+
+a.delete:hover {
+  color: #000;
+  font-size: 90%;
+}
+
+li {
+  line-height: 1.5em;
+}
